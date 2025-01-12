@@ -1,4 +1,4 @@
-![Banner Image](./images/banner.png)
+![Banner Image](./banner.png)
 
 # GitHub Desktop Environment Setup
 
