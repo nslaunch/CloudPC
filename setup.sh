@@ -70,6 +70,7 @@ update_to_latest_lts() {
     if [[ "$upgrade_choice" == "y" || "$upgrade_choice" == "Y" ]]; then
         echo "Upgrading to the latest Ubuntu LTS version..."
         sudo apt update && sudo apt full-upgrade -y
+        sudo apt install -y update-manager-core
         sudo do-release-upgrade -d
     else
         echo "Skipping upgrade to the latest LTS version."
