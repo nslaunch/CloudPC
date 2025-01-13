@@ -115,5 +115,4 @@ Contributions are welcome! If you have ideas for improvements or new features, f
 
 If you've used this script to set up your Codespace desktop, share a screenshot or feedback! We'd love to see what you've built.
 
-```
-
+![Banner Image](./banner1.png)
