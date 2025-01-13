@@ -111,8 +111,19 @@ Contributions are welcome! If you have ideas for improvements or new features, f
 
 ---
 
-## 🌟 Showcase Your Setup
+## 🌟 Showcase 
 
-If you've used this script to set up your Codespace desktop, share a screenshot or feedback! We'd love to see what you've built.
+![Banner Image](./preview1.png)
+
+![Banner Image](./preview2.png)
+
+![Banner Image](./preview3.png)
+
+![Banner Image](./preview4.png)
+
+![Banner Image](./preview5.png)
+
+
+## The End
 
 ![Banner Image](./banner1.png)
