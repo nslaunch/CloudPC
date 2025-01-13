@@ -41,6 +41,9 @@ echo "🚀 Updating package list..."
 sudo apt update
 sudo apt install -y tightvncserver
 sudo apt install -y python3-websockify
+sudo apt install -y novnc
+
+
 
 
 
