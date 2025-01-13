@@ -9,14 +9,14 @@ set -o pipefail
 # Function to display a menu and let the user choose a DE
 choose_desktop_environment() {
     echo "Please choose a Desktop Environment to install:"
-    echo "1. GNOME"
+    echo "1. GNOME (Stable)"
     echo "2. KDE Plasma"
-    echo "3. XFCE"
+    echo "3. XFCE (Stable)"
     echo "4. Cinnamon"
     echo "5. MATE"
-    echo "6. LXQt"
+    echo "6. LXQt (Stable)"
     echo "7. Budgie"
-    echo "8. Deepin"
+    echo "8. Deepin (Unstable)"
     echo "9. Pantheon"
     echo "10. Exit"
 
