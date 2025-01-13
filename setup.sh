@@ -2,6 +2,9 @@
 
 # Script to Install a Desktop Environment in GitHub Codespaces
 # This script allows the user to choose from multiple desktop environments and sets up noVNC for remote access.
+#"This code is the intellectual property of @ECL_Adler400 and is protected under applicable copyright and intellectual property laws.Unauthorized access, use, modification, reproduction, or distribution of this code, in part or in whole, is strictly prohibited. If you wish to use, share, or modify this code for personal, educational, or commercial purposes, explicit written permission from @ECL_Adler400 is required. Failure to comply with these terms may result in legal action and other remedies as permitted by law."
+
+
 
 set -e
 set -o pipefail
