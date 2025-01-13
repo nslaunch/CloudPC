@@ -62,21 +62,7 @@ install_theme_lxqt() {
     pcmanfm-qt --set-wallpaper="/usr/share/backgrounds/xfce/default-wallpaper.png"
 }
 
-# Function to update to the latest Ubuntu LTS version
-update_to_latest_lts() {
-    echo "Would you like to upgrade to the latest Ubuntu LTS version? (y/n)"
-    read -p "Enter your choice: " upgrade_choice
-
-    if [[ "$upgrade_choice" == "y" || "$upgrade_choice" == "Y" ]]; then
-        echo "Upgrading to the latest Ubuntu LTS version..."
-        sudo apt update && sudo apt full-upgrade -y
-        sudo apt install -y update-manager-core
-        sudo do-release-upgrade -d
-    else
-        echo "Skipping upgrade to the latest LTS version."
-    fi
-}
-
+# 
 # Start script
 clear
 echo "🚀 Updating package list..."
