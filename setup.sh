@@ -39,6 +39,8 @@ choose_desktop_environment() {
 
 echo "🚀 Updating package list..."
 sudo apt update
+sudo apt install -y tightvncserver
+
 
 # Prompt user to choose a desktop environment
 choose_desktop_environment
