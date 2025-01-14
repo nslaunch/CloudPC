@@ -2,23 +2,28 @@
 
 # GitHub Desktop Environment Setup
 
-This repository provides an interactive **setup script** to install and run a desktop environment (DE) inside **GitHub Codespaces**. It includes support for multiple DEs, letting users choose their preferred option during the installation process.
+This repository provides an interactive **setup script** to install and run a desktop environment (DE) inside **GitHub Codespaces**. It includes support for a selection of stable DEs, allowing users to customize their experience based on preferences.
 
-
+![Banner Image](./banner1.png)
+---
 
 ## 🚀 Features
 
-- **Customizable Setup**: Choose from popular desktop environments like GNOME, KDE Plasma, XFCE, Cinnamon, MATE, and more.
-- **Web-Based Access**: Access your Codespace desktop using **VNC** and **noVNC** in your browser.
+- **Customizable Setup**: Choose from stable desktop environments like XFCE, GNOME, KDE Plasma, and LXQt.
+- **Web-Based Access**: Seamlessly access your Codespace desktop using **VNC** and **noVNC** directly in your browser.
+- **User-Friendly**: Guided installation process with explanations for every step.
 - **Secure Access**: Automatically generates SSL certificates for encrypted noVNC connections.
+- **Additional Tools**: Includes optional scripts to install extra applications and update to the latest Ubuntu LTS version.
 
-
+---
 
 ## 📋 Requirements
 
-- **GitHub Codespaces** with sufficient resources (at least 2 cores and 4 GB RAM recommended).
-- **Internet connection** to install packages and access the desktop remotely.
+- **GitHub Codespaces** with sufficient resources:
+  - Recommended: At least 2 cores and 4 GB RAM.
+- **Internet Connection**: Required for installing packages and accessing the desktop remotely.
 
+---
 
 ## 📂 How to Use
 
@@ -39,24 +44,23 @@ This repository provides an interactive **setup script** to install and run a de
    ```bash
    ./setup.sh
    ```
-4. Follow the prompts to choose your desktop environment.
+4. Follow the prompts to:
+   - Select your desktop environment.
+   - Customize your installation (optional).
+   - Configure access and additional settings.
 
+---
 
 ## 🖥️ Desktop Environments Available
 
-During installation, you can choose from the following desktop environments:
+During installation, you can choose from the following **stable** desktop environments:
 
-1. **GNOME**
-2. **KDE Plasma**
-3. **XFCE**
-4. **Cinnamon**
-5. **MATE**
-6. **LXQt**
-7. **Budgie**
-8. **Deepin**
-9. **Pantheon**
+1. **XFCE** (Recommended for stability and performance)
+2. **GNOME**
+3. **KDE Plasma**
+4. **LXQt**
 
-The script will install the selected DE along with all required components.
+The script installs the selected DE along with all required components for a smooth experience.
 
 ---
 
@@ -99,6 +103,54 @@ GitHub Codespaces automatically stops after 1 hour of inactivity. When restartin
 
 ---
 
+## ❓ FAQ
+
+### 1️⃣ My Codespace is gone. What happened?
+Codespaces are automatically deleted after 1 month unless you toggle the auto-deletion setting off.
+
+### 2️⃣ Can I install multiple desktop environments?
+Yes, you can install multiple DEs, but we recommend sticking to one for better performance and stability.
+
+### 3️⃣ Which desktop environment is best for performance?
+**XFCE** is lightweight and provides the best performance in a Codespace environment.
+
+### 4️⃣ How do I customize the desktop environment?
+The setup script allows you to apply themes and install additional tools specific to your selected DE.
+
+### 5️⃣ Can I access my desktop from another computer?
+Yes, as long as you have the Codespace URL and access to your GitHub account.
+
+### 6️⃣ Is my Codespace secure?
+Yes, the script generates SSL certificates to encrypt connections via noVNC.
+
+### 7️⃣ What happens if my Codespace stops?
+You can restart it from your GitHub Codespaces dashboard and reinitialize the VNC server and noVNC.
+
+### 8️⃣ Can I update my Ubuntu version later?
+Yes, use the optional `update.sh` script in this repository to upgrade to the latest LTS version.
+
+### 9️⃣ How do I install additional applications?
+Run the `tools.sh` script to install common tools and applications.
+
+### 🔟 What are the minimum requirements for this setup?
+We recommend at least 2 cores and 4 GB of RAM for a smooth experience.
+
+---
+
+## 🌟 Showcase 
+
+![Preview Image 1](./preview1.png)
+
+![Preview Image 2](./preview2.png)
+
+![Preview Image 3](./preview3.png)
+
+![Preview Image 4](./preview4.png)
+
+![Preview Image 5](./preview5.png)
+
+---
+
 ## 📖 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
@@ -108,22 +160,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## 🤝 Contributing
 
 Contributions are welcome! If you have ideas for improvements or new features, feel free to open an issue or submit a pull request.
-
----
-
-## 🌟 Showcase 
-
-![Banner Image](./preview1.png)
-
-![Banner Image](./preview2.png)
-
-![Banner Image](./preview3.png)
-
-![Banner Image](./preview4.png)
-
-![Banner Image](./preview5.png)
-
-
-## The End
-
-![Banner Image](./banner1.png)
