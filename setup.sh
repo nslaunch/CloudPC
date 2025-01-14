@@ -1,97 +1,100 @@
+
 #!/bin/bash
 
-# Script to Install a Desktop Environment in GitHub Codespaces
-# This script allows the user to choose from multiple desktop environments and sets up noVNC for remote access.
-#"This code is the intellectual property of @ECL_Adler400 and is protected under applicable copyright and intellectual property laws.Unauthorized access, use, modification, reproduction, or distribution of this code, in part or in whole, is strictly prohibited. If you wish to use, share, or modify this code for personal, educational, or commercial purposes, explicit written permission from @ECL_Adler400 is required. Failure to comply with these terms may result in legal action and other remedies as permitted by law."
-
-
+# Script to Install and Customize Desktop Environments in GitHub Codespaces
+# This code is the intellectual property of @ECL_Adler400 and is protected under applicable copyright and intellectual property laws.
+# Unauthorized access, use, modification, reproduction, or distribution of this code, in part or in whole, is strictly prohibited.
 
 set -e
 set -o pipefail
 
-# Function to display a menu and let the user choose a DE
+# Function to display a menu for the user to choose DE(s)
 choose_desktop_environment() {
-    echo "Please choose a Desktop Environment to install:"
-    echo "1. GNOME"
-    echo "2. KDE Plasma"
-    echo "3. XFCE (Stable)"
-    echo "4. Cinnamon"
-    echo "5. MATE"
-    echo "6. LXQt"
-    echo "7. Budgie"
-    echo "8. Deepin"
-    echo "9. Pantheon"
-    echo "10. Exit"
+    echo "Please choose Desktop Environment(s) to install (separate multiple choices with spaces):"
+    echo "1. XFCE (Default)"
+    echo "2. GNOME"
+    echo "3. KDE Plasma"
+    echo "4. LXQt"
+    read -p "Enter your choice(s) [Default: XFCE]: " choices
 
-    read -p "Enter the number of your choice: " choice
+    # Default to XFCE if input is invalid or empty
+    if [[ -z "$choices" ]]; then
+        choices="1"
+    fi
 
-    case $choice in
-        1) echo "Installing GNOME..."; sudo apt install -y ubuntu-gnome-desktop ;;
-        2) echo "Installing KDE Plasma..."; sudo apt install -y kde-plasma-desktop ;;
-        3) echo "Installing XFCE..."; sudo apt install -y xfce4 xfce4-goodies ;;
-        4) echo "Installing Cinnamon..."; sudo apt install -y cinnamon ;;
-        5) echo "Installing MATE..."; sudo apt install -y mate-desktop-environment ;;
-        6) echo "Installing LXQt..."; sudo apt install -y lxqt ;;
-        7) echo "Installing Budgie..."; sudo apt install -y budgie-desktop ;;
-        8) echo "Installing Deepin..."; sudo apt install -y deepin-desktop-environment ;;
-        9) echo "Installing Pantheon..."; sudo apt install -y pantheon ;;
-        10) echo "Exiting script. No changes were made."; exit 0 ;;
-        *) echo "Invalid choice. Please run the script again."; exit 1 ;;
-    esac
+    for choice in $choices; do
+        case $choice in
+            1) echo "Installing XFCE..."; sudo apt install -y xfce4 xfce4-goodies; install_theme_xfce ;;
+            2) echo "Installing GNOME..."; sudo apt install -y ubuntu-gnome-desktop; install_theme_gnome ;;
+            3) echo "Installing KDE Plasma..."; sudo apt install -y kde-plasma-desktop; install_theme_kde ;;
+            4) echo "Installing LXQt..."; sudo apt install -y lxqt; install_theme_lxqt ;;
+            *) echo "Invalid choice: $choice. Defaulting to XFCE..."; sudo apt install -y xfce4 xfce4-goodies; install_theme_xfce ;;
+        esac
+    done
 }
 
+# Function to customize XFCE
+install_theme_xfce() {
+    echo "Customizing XFCE..."
+    sudo apt install -y arc-theme
+    xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
+}
+
+# Function to customize GNOME
+install_theme_gnome() {
+    echo "Customizing GNOME..."
+    sudo apt install -y gnome-tweaks arc-theme
+    gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
+}
+
+# Function to customize KDE Plasma
+install_theme_kde() {
+    echo "Customizing KDE Plasma..."
+    sudo apt install -y plasma-look-and-feel-org-cinnamon.desktop arc-kde
+    lookandfeeltool -a org.cinnamon.desktop
+}
+
+# Function to customize LXQt
+install_theme_lxqt() {
+    echo "Customizing LXQt..."
+    sudo apt install -y arc-theme
+    pcmanfm-qt --set-wallpaper="/usr/share/backgrounds/xfce/default-wallpaper.png"
+}
+
+# Start script
+clear
 echo "🚀 Updating package list..."
 sudo apt update
-sudo apt install -y tightvncserver
-sudo apt install -y python3-websockify
-sudo apt install -y novnc
-sudo apt install -y neofetch
-sudo apt install -y firefox
 
+# Install basic packages
+sudo apt install -y tightvncserver python3-websockify novnc neofetch firefox
 
-
-
-# Prompt user to choose a desktop environment
+# Prompt user to choose desktop environments
 choose_desktop_environment
 
+# Generate SSL certificate for noVNC
 echo "🔒 Generating SSL certificate for noVNC..."
 openssl req -x509 -nodes -newkey rsa:3072 -keyout ~/novnc.pem -out ~/novnc.pem -days 3650 -subj "/CN=localhost"
 
+# Configure VNC Server
 echo "🖥️ Starting VNC Server (as root)..."
 USER=root vncserver || true
 
-echo "🛑 Killing any existing VNC sessions..."
+# Kill existing VNC sessions
 vncserver -kill :1 || true
 
-echo "📁 Backing up and creating a new xstartup file..."
-if [ -f ~/.vnc/xstartup ]; then
-    mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
-    echo "🔙 Old xstartup file backed up as ~/.vnc/xstartup.bak"
-fi
-
-# Create a new xstartup file based on the installed desktop environment
+# Configure xstartup file
 cat <<EOF > ~/.vnc/xstartup
 #!/bin/sh
 xrdb \$HOME/.Xresources
-# Automatically start the desktop environment
-if [ -x /usr/bin/startplasma-x11 ]; then
-    startplasma-x11 &
-elif [ -x /usr/bin/startxfce4 ]; then
+if [ -x /usr/bin/startxfce4 ]; then
     startxfce4 &
-elif [ -x /usr/bin/cinnamon-session ]; then
-    cinnamon-session &
-elif [ -x /usr/bin/mate-session ]; then
-    mate-session &
-elif [ -x /usr/bin/budgie-desktop ]; then
-    budgie-desktop &
-elif [ -x /usr/bin/startlxqt ]; then
-    startlxqt &
-elif [ -x /usr/bin/startdde ]; then
-    startdde &
 elif [ -x /usr/bin/gnome-session ]; then
     gnome-session &
-elif [ -x /usr/bin/pantheon-session ]; then
-    pantheon-session &
+elif [ -x /usr/bin/startplasma-x11 ]; then
+    startplasma-x11 &
+elif [ -x /usr/bin/startlxqt ]; then
+    startlxqt &
 else
     echo "No recognized desktop environment found in xstartup."
     exit 1
@@ -100,9 +103,9 @@ EOF
 
 chmod +x ~/.vnc/xstartup
 
+# Final instructions
 echo "✅ Setup complete! You can start the VNC server with:"
 echo "   vncserver :1"
 echo "📡 For browser access, start noVNC with:"
 echo "   websockify -D --web=/usr/share/novnc/ --cert=\$HOME/novnc.pem 6081 localhost:5901"
-
 echo "💡 Tip: Replace '6081' with a unique port number if needed."
