@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Script to Install and Customize Desktop Environments in GitHub Codespaces
@@ -24,41 +23,13 @@ choose_desktop_environment() {
 
     for choice in $choices; do
         case $choice in
-            1) echo "Installing XFCE..."; sudo apt install -y xfce4 xfce4-goodies; install_theme_xfce ;;
-            2) echo "Installing GNOME..."; sudo apt install -y ubuntu-gnome-desktop; install_theme_gnome ;;
-            3) echo "Installing KDE Plasma..."; sudo apt install -y kde-plasma-desktop; install_theme_kde ;;
-            4) echo "Installing LXQt..."; sudo apt install -y lxqt; install_theme_lxqt ;;
-            *) echo "Invalid choice: $choice. Defaulting to XFCE..."; sudo apt install -y xfce4 xfce4-goodies; install_theme_xfce ;;
+            1) echo "Installing XFCE..."; sudo apt install -y xfce4 xfce4-goodies ;;
+            2) echo "Installing GNOME..."; sudo apt install -y ubuntu-gnome-desktop gnome-session gnome-shell ;;
+            3) echo "Installing KDE Plasma..."; sudo apt install -y kde-plasma-desktop plasma-workspace sddm ;;
+            4) echo "Installing LXQt..."; sudo apt install -y lxqt sddm ;;
+            *) echo "Invalid choice: $choice. Defaulting to XFCE..."; sudo apt install -y xfce4 xfce4-goodies ;;
         esac
     done
-}
-
-# Function to customize XFCE
-install_theme_xfce() {
-    echo "Customizing XFCE..."
-    sudo apt install -y arc-theme
-    xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
-}
-
-# Function to customize GNOME
-install_theme_gnome() {
-    echo "Customizing GNOME..."
-    sudo apt install -y gnome-tweaks arc-theme
-    gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
-}
-
-# Function to customize KDE Plasma
-install_theme_kde() {
-    echo "Customizing KDE Plasma..."
-    sudo apt install -y plasma-look-and-feel-org-cinnamon.desktop arc-kde
-    lookandfeeltool -a org.cinnamon.desktop
-}
-
-# Function to customize LXQt
-install_theme_lxqt() {
-    echo "Customizing LXQt..."
-    sudo apt install -y arc-theme
-    pcmanfm-qt --set-wallpaper="/usr/share/backgrounds/xfce/default-wallpaper.png"
 }
 
 # Start script
@@ -67,7 +38,7 @@ echo "🚀 Updating package list..."
 sudo apt update
 
 # Install basic packages
-sudo apt install -y tightvncserver python3-websockify novnc neofetch firefox
+sudo apt install -y tightvncserver python3-websockify novnc neofetch firefox dbus-x11 x11-xserver-utils xinit
 
 # Prompt user to choose desktop environments
 choose_desktop_environment
@@ -87,10 +58,11 @@ vncserver -kill :1 || true
 cat <<EOF > ~/.vnc/xstartup
 #!/bin/sh
 xrdb \$HOME/.Xresources
+
 if [ -x /usr/bin/startxfce4 ]; then
     startxfce4 &
 elif [ -x /usr/bin/gnome-session ]; then
-    gnome-session &
+    gnome-session --session=gnome &
 elif [ -x /usr/bin/startplasma-x11 ]; then
     startplasma-x11 &
 elif [ -x /usr/bin/startlxqt ]; then
