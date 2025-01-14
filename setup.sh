@@ -74,8 +74,7 @@ sudo apt install -y tightvncserver python3-websockify novnc neofetch firefox
 # Prompt user to update to the latest Ubuntu LTS
 update_to_latest_lts
 
-# Prompt user to choose desktop environments
-choose_desktop_environment
+# Prompt user to choose desktop 
 
 # Generate SSL certificate for noVNC
 echo "🔒 Generating SSL certificate for noVNC..."
