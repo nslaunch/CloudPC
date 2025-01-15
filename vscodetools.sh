@@ -4,8 +4,3 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microso
 sudo apt update
 sudo apt install code
 
-sudo apt update
-sudo apt install python3 python3-pip
-
-sudo apt update
-sudo apt install lutris
