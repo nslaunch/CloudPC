@@ -11,9 +11,9 @@ set -o pipefail
 choose_desktop_environment() {
     echo "Please choose Desktop Environment(s) to install (separate multiple choices with spaces):"
     echo "1. XFCE (Default)"
-    echo "2. GNOME"
-    echo "3. KDE Plasma"
-    echo "4. LXQt"
+    echo "2. GNOME (Not WORKING)"
+    echo "3. KDE Plasma (Not WORKING)"
+    echo "4. LXQt (Not WORKING)"
     read -p "Enter your choice(s) [Default: XFCE]: " choices
 
     # Default to XFCE if input is invalid or empty
