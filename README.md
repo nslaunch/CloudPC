@@ -55,7 +55,7 @@ This repository provides an interactive **setup script** to install and run a de
 
 During installation, you can choose from the following **stable** desktop environments:
 
-1. **XFCE** (Recommended for stability and performance)
+1. **XFCE** (Recommended as the other DE wont work :( )
 2. **GNOME**
 3. **KDE Plasma**
 4. **LXQt**
