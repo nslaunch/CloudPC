@@ -9,18 +9,18 @@ This repository provides an interactive **setup script** to install and run a de
 
 ## 🚀 Features
 
-- **Customizable Setup**: Choose from stable desktop environments like XFCE, GNOME, KDE Plasma, and LXQt.
+- **Customizable Setup**: Choose from one stable desktop environments XFCE.
 - **Web-Based Access**: Seamlessly access your Codespace desktop using **VNC** and **noVNC** directly in your browser.
 - **User-Friendly**: Guided installation process with explanations for every step.
 - **Secure Access**: Automatically generates SSL certificates for encrypted noVNC connections.
-- **Additional Tools**: Includes optional scripts to install extra applications and update to the latest Ubuntu LTS version.
+- **Additional Tools**: Includes optional scripts to install VScode
 
 ---
 
 ## 📋 Requirements
 
 - **GitHub Codespaces** with sufficient resources:
-  - Recommended: At least 2 cores and 4 GB RAM.
+  - Recommended: At least 2 cores or 4 cores.
 - **Internet Connection**: Required for installing packages and accessing the desktop remotely.
 
 ---
@@ -32,7 +32,7 @@ This repository provides an interactive **setup script** to install and run a de
 
 ### 2️⃣ Open the Repository in GitHub Codespaces
 - Navigate to your forked repository.
-- Click **Code > Open with Codespaces** to start your Codespace.
+- Click **Code > Open with Codespaces** to start your Codespace for 2-Core Version or go to https://github.com/codespaces create new codespace and configure it for 4-Core Version.
 
 ### 3️⃣ Run the Setup Script
 1. Open the **Terminal** in your Codespace.
@@ -55,10 +55,8 @@ This repository provides an interactive **setup script** to install and run a de
 
 During installation, you can choose from the following **stable** desktop environments:
 
-1. **XFCE** (Recommended as the other DEs wont work :( )
-2. **GNOME**
-3. **KDE Plasma**
-4. **LXQt**
+1. **XFCE** 
+   
 
 The script installs the selected DE along with all required components for a smooth experience.
 
@@ -109,13 +107,13 @@ GitHub Codespaces automatically stops after 1 hour of inactivity. When restartin
 Codespaces are automatically deleted after 1 month unless you toggle the auto-deletion setting off.
 
 ### 2️⃣ Can I install multiple desktop environments?
-Yes, you can install multiple DEs, but we recommend sticking to one for better performance and stability.
+No, you could try but it needs some modifying and I gave up configuring multuple Des
 
 ### 3️⃣ Which desktop environment is best for performance?
 **XFCE** is lightweight and provides the best performance in a Codespace environment.
 
 ### 4️⃣ How do I customize the desktop environment?
-The setup script allows you to apply themes and install additional tools specific to your selected DE.
+Just search on Youtube XFCE custumizations.
 
 ### 5️⃣ Can I access my desktop from another computer?
 Yes, as long as you have the Codespace URL and access to your GitHub account.
@@ -133,7 +131,7 @@ Yes, use the optional `update.sh` script in this repository to upgrade to the la
 Run the `tools.sh` script to install common tools and applications.
 
 ### 🔟 What are the minimum requirements for this setup?
-We recommend at least 2 cores and 4 GB of RAM for a smooth experience.
+We recommend at least 2 cores and 4-Cores for a smooth experience.
 
 ---
 
