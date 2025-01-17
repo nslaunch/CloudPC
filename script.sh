@@ -1,34 +1,32 @@
 #!/bin/bash
 
-# Directory for temporary project
-PROJECT_DIR="/tmp/wakatime-simulation"
+# Directory for temporary project inside Codespaces
+PROJECT_DIR="$HOME/wakatime-simulation"
 mkdir -p "$PROJECT_DIR"
 
-# Generate file names for simulation
-FILES=(
-    "file1.txt" "file2.py" "file3.js" "file4.java" "file5.html"
-    "file6.css" "file7.php" "file8.rb" "file9.c" "file10.cpp"
-    "file11.sh" "file12.md" "file13.json" "file14.xml" "file15.yaml"
-)
+# Files to create and simulate activity
+FILES=("file1.py" "file2.js" "file3.html" "file4.css" "file5.md")
 
-# Function to simulate file editing
-simulate_edit() {
-    local file="$1"
-    echo "$(date): Simulating edit in $file" >> "$file"
-}
-
-# Create the files if they don't already exist
+# Create files if they don’t already exist
 for file in "${FILES[@]}"; do
     touch "$PROJECT_DIR/$file"
 done
 
-echo "Simulation started. Running indefinitely..."
-echo "You can stop this script by pressing Ctrl+C."
+echo "Files created in $PROJECT_DIR. Open them manually in VS Code once."
 
-# Infinite loop to simulate coding activity
+echo "Make sure to open one of the files in the VS Code editor for WakaTime to detect activity."
+echo "Starting activity simulation. Press Ctrl+C to stop."
+
+# Infinite loop to simulate typing activity
 while true; do
     for file in "${FILES[@]}"; do
-        simulate_edit "$PROJECT_DIR/$file"
-        sleep $((RANDOM % 5 + 1))  # Random sleep between 1 and 5 seconds
+        # Append text to the file (simulates editing)
+        echo "$(date): Editing $file" >> "$PROJECT_DIR/$file"
+
+        # Bring the file into focus in VS Code
+        code "$PROJECT_DIR/$file"
+
+        # Pause for a random duration (1-5 seconds)
+        sleep $((RANDOM % 5 + 1))
     done
 done
