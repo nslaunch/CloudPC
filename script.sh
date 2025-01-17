@@ -5,26 +5,25 @@ PROJECT_DIR="/tmp/wakatime-simulation"
 mkdir -p "$PROJECT_DIR"
 
 # Generate file names for simulation
-FILES=("file1.txt" "file2.py" "file3.js" "file4.java" "file5.html")
-
-# Ensure VS Code CLI is available
-if ! command -v code &> /dev/null; then
-    echo "VS Code CLI 'code' is not installed or not in PATH."
-    exit 1
-fi
+FILES=(
+    "file1.txt" "file2.py" "file3.js" "file4.java" "file5.html"
+    "file6.css" "file7.php" "file8.rb" "file9.c" "file10.cpp"
+    "file11.sh" "file12.md" "file13.json" "file14.xml" "file15.yaml"
+)
 
 # Function to simulate file editing
 simulate_edit() {
     local file="$1"
     echo "$(date): Simulating edit in $file" >> "$file"
-    echo "Edited $file at $(date)"
 }
 
-# Open files in VS Code
+# Create the files if they don't already exist
 for file in "${FILES[@]}"; do
     touch "$PROJECT_DIR/$file"
-    code --add "$PROJECT_DIR/$file"  # Add the file to the current VS Code workspace
 done
+
+echo "Simulation started. Running indefinitely..."
+echo "You can stop this script by pressing Ctrl+C."
 
 # Infinite loop to simulate coding activity
 while true; do
